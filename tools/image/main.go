@@ -23,6 +23,7 @@ import (
 	dockertypes "github.com/docker/docker/api/types"
 	dockercli "github.com/docker/docker/client"
 	"github.com/google/go-containerregistry/pkg/authn"
+	v1 "github.com/google/go-containerregistry/pkg/v1"
 
 	"github.com/buildpacks/lifecycle/archive"
 )
@@ -103,7 +104,7 @@ func main() {
 		img, err = remote.NewImage(
 			tags[0], authn.DefaultKeychain,
 			remote.FromBaseImage(baseImage),
-			remote.WithDefaultPlatform(imgutil.Platform{
+			remote.WithDefaultPlatform(v1.Platform{
 				Architecture: targetArch,
 				OS:           targetOS,
 			}),

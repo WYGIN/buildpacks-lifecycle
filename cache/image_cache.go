@@ -9,6 +9,7 @@ import (
 	"github.com/buildpacks/imgutil"
 	"github.com/buildpacks/imgutil/remote"
 	"github.com/google/go-containerregistry/pkg/authn"
+	v1 "github.com/google/go-containerregistry/pkg/v1"
 	"github.com/pkg/errors"
 
 	"github.com/buildpacks/lifecycle/image"
@@ -42,7 +43,7 @@ func NewImageCacheFromName(name string, keychain authn.Keychain, logger log.Logg
 		name,
 		keychain,
 		remote.FromBaseImage(name),
-		remote.WithDefaultPlatform(imgutil.Platform{OS: runtime.GOOS}),
+		remote.WithDefaultPlatform(v1.Platform{OS: runtime.GOOS}),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("accessing cache image %q: %v", name, err)
@@ -51,7 +52,7 @@ func NewImageCacheFromName(name string, keychain authn.Keychain, logger log.Logg
 		name,
 		keychain,
 		remote.WithPreviousImage(name),
-		remote.WithDefaultPlatform(imgutil.Platform{OS: runtime.GOOS}),
+		remote.WithDefaultPlatform(v1.Platform{OS: runtime.GOOS}),
 		remote.AddEmptyLayerOnSave(),
 	)
 	if err != nil {

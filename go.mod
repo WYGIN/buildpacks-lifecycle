@@ -142,3 +142,5 @@ require (
 )
 
 go 1.21
+
+replace github.com/buildpacks/imgutil => github.com/WYGIN/buildpacks-imgutil v0.0.0-20240315104835-49941eefaae6
